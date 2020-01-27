@@ -1,4 +1,5 @@
 # Copyright (C) 2019 AngeloGioacchino Del Regno <kholk11@gmail.com>
+# Copyright (C) 2020 Martin Dünkelmann <nc-duenkekl3@netcologne.de>
 #
 # ROM specific customization for Sony Open Devices
 #
@@ -22,42 +23,42 @@ CUST_PATH := device/sony/customization
 
 DEVICE_PACKAGE_OVERLAYS += $(CUST_PATH)/overlay
 
-ifneq ($(filter aosp_f53% aosp_g1109 aosp_g8441, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_kugo lineage_blanc lineage_lilac, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 endif
 
-ifneq ($(filter aosp_f51% aosp_f8% aosp_g82% aosp_g83% aosp_h%13 aosp_i%13, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_suzu lineage_dora lineage_kagura lineage_keyaki lineage_poplar lineage_pioneer lineage_voyager lineage_discovery lineage_kirin, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 endif
 
-ifneq ($(filter aosp_h82%6 aosp_h83%4, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_akari lineage_apollo, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 2160
 TARGET_SCREEN_WIDTH := 1080
 endif
 
-ifneq ($(filter aosp_h84%6 aosp_h94%6, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_akatsuki, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 2880
 TARGET_SCREEN_WIDTH := 1440
 endif
 
-ifneq ($(filter aosp_j%210, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_mermaid lineage_bahamut, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 2520
 TARGET_SCREEN_WIDTH := 1080
 endif
 
-ifneq ($(filter aosp_g814%, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_maple, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 3840
 TARGET_SCREEN_WIDTH := 2160
 endif
 
-ifneq ($(filter aosp_j%110, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_griffin, $(TARGET_PRODUCT)),)
 TARGET_SCREEN_HEIGHT := 3840
 TARGET_SCREEN_WIDTH := 1644
 endif
 
-ifneq ($(filter aosp_g814%, $(TARGET_PRODUCT)),)
+ifneq ($(filter lineage_maple, $(TARGET_PRODUCT)),)
 # Faking to 1080 to get the right bootanimation res on:
 # Maple(3840x2160)
 TARGET_BOOT_ANIMATION_RES := 1080
@@ -161,8 +162,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 TARGET_USES_AOSP_APNS_CONF := true
 
 # Wallpapers
-PRODUCT_PACKAGES += \
-    PixelLiveWallpaperPrebuilt
+#PRODUCT_PACKAGES += \
+#    PixelLiveWallpaperPrebuilt #Not existing in LineageOS 17.1
 
 # Widevine
 $(call inherit-product-if-exists, vendor/widevine/widevine.mk)
@@ -173,4 +174,19 @@ DEXPREOPT_GENERATE_APEX_IMAGE := true
 # Temporary: Enable QCRILD for all platforms
 TARGET_USE_QCRILD := true
 
--include vendor/aosp/config/common_full_phone.mk
+-include vendor/lineage/config/common_full_phone.mk
+
+#TWRP IS NOT READ FOR ANDROID 10
+#TWRP IS NOT READ FOR ANDROID 10
+#TWRP IS NOT READ FOR ANDROID 10
+# TWRP
+# WITH_TWRP := true
+# $(call inherit-product, device/sony/customization/recovery/twrp.mk)
+
+# PRIVATE WORKAROUND BECAUSE OF MISSING TWRP -> BUILDIN PICO GAPPS
+# PRIVATE WORKAROUND BECAUSE OF MISSING TWRP -> BUILDIN PICO GAPPS
+# PRIVATE WORKAROUND BECAUSE OF MISSING TWRP -> BUILDIN PICO GAPPS
+# PRIVATE WORKAROUND BECAUSE OF MISSING TWRP -> BUILDIN PICO GAPPS
+# PRIVATE WORKAROUND BECAUSE OF MISSING TWRP -> BUILDIN PICO GAPPS
+# GAPPS
+$(call inherit-product, device/sony/customization/workaround_until_twrp_ready/gapps.mk)
