@@ -37,3 +37,11 @@ TARGET_NEEDS_DTBOIMAGE := false
 DEVICE_MANIFEST_FILE += $(CUST_PATH)/ims/cne/vendor.hw.cneservices.xml
 
 BOARD_VENDOR_SEPOLICY_DIRS += $(CUST_PATH)/ims/cne/sepolicy
+
+# AVB prevents modifications like GAPPS or the dualsim patcher from working.
+# It detects these "modified" files and prevent them from being loaded.
+# Which results in a broken device, after an OTA reactivates AVB.
+# AVB is anyway not useful, since we can't relock our device and everybody with direct hardware access can modify it.
+# If we set this variable in the customization repo, it won't get used, since it gets already set in the SODP device trees.
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
