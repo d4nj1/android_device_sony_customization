@@ -92,6 +92,10 @@ PRODUCT_PACKAGES += \
     libsmwrapper \
     libmulawdec
 
+# TEMP: Data Items management lib for GNSS
+PRODUCT_PACKAGES += \
+    libdataitems
+
 # IMS Extras
 PRODUCT_PACKAGES += \
     qtiImsInCallUi \
